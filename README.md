@@ -5,7 +5,7 @@
 
 This project uses **Ansible** to automate the deployment of a **Node.js application** on remote managed nodes.
 
-## ✅ Features
+## ✅ STEPS
 
 - copy compressed file to remote server
 - extract the archive
