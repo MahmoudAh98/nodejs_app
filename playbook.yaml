@@ -1,0 +1,30 @@
+---
+- name: Deploy nodejs application
+  hosts: vms
+  tasks:
+    - name: copy the compressed file to the managed nodes
+      ansible.builtin.copy:
+         src: nodejs-app-1.0.0.tgz
+         dest: /home/ansible
+
+    - name: extract the archive file on the managed nodes
+      ansible.builtin.unarchive:
+         src: /home/ansible/nodejs-app-1.0.0.tgz
+         dest: /home/ansible
+         remote_src: yes
+
+    - name: install dependencies  npm, nodejs on the managed nodes
+      ansible.builtin.dnf:
+         name: npm
+         state: present
+
+    - name: install and start npm on the managed nodes 
+      ansible.builtin.shell: |
+        npm install 
+        nohup npm start  &
+      args:
+         chdir: /home/ansible/package
+
+
+
+
